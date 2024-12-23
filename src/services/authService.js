@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const logger = require('./logger');
+const { InvalidTokenError, ExpiredTokenError } = require('./errorHandler');
+
+
 
 /**
  * Token Service Module
@@ -36,26 +39,28 @@ module.exports = {
    * @throws Will throw an error if token verification fails.
    */
   async verifyToken(token) {
+    const secret = process.env.JWT_SECRET;
+  
+    if (!secret) {
+      logger.error('JWT_SECRET environment variable not set');
+      throw new Error('Internal server error'); 
+    }
+  
     try {
-      const secret = process.env.JWT_SECRET;
-
-      if (!secret) {
-        throw new Error('JWT_SECRET environment variable not set');
-      }
-
+      // Verify the token
       const decoded = jwt.verify(token, secret);
-      return decoded;
+      
+      return decoded; 
     } catch (error) {
+     
       if (error.name === 'JsonWebTokenError') {
-        logger.error('Invalid JWT token:', error);
-        throw new Error('Invalid JWT token');
+        throw new InvalidTokenError('Invalid token provided'); 
       } else if (error.name === 'TokenExpiredError') {
-        logger.error('Expired JWT token:', error);
-        throw new Error('JWT token has expired');
+        throw new ExpiredTokenError('Token has expired, please log in again');
       } else {
-        logger.error('Error verifying token:', error);
+        logger.error('Error verifying token:', error.message);
         throw new Error('Error verifying token');
       }
     }
-  },
+  }
 };

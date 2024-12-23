@@ -1,10 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const logger = require('./logger');
+const fs = require("fs");
+const path = require("path");
+const logger = require("./logger");
 
 module.exports = {
-
- 
   deleteFile: async function (filePath) {
     try {
       await fs.promises.unlink(filePath); // Delete the file
@@ -14,20 +12,24 @@ module.exports = {
       throw error;
     }
   },
-  generateOTP: function () {
-    // Generate a random number between 1000 and 9999
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    return otp;
-  },
-   cleanUpFiles: async function(files) {
-    try {
-    for (const file of files) {
-        await fs.promises.unlink(file.path); 
-        logger.info(`Deleted file: ${file.path}`);
+  makeRandomNumber: (length) => {
+    let result = "";
+    const characters = "0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-  } catch (error) {
-    logger.error(`Error deleting files:`, error);
-    throw error;
-  }
-}
-}
+    return result;
+  },
+  cleanUpFiles: async function (files) {
+    try {
+      for (const file of files) {
+        await fs.promises.unlink(file.path);
+        logger.info(`Deleted file: ${file.path}`);
+      }
+    } catch (error) {
+      logger.error(`Error deleting files:`, error);
+      throw error;
+    }
+  },
+};

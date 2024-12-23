@@ -46,7 +46,11 @@ app.get(`/`, function(req, res){
 });
 
 // routes
-app.use(BASE_PATHS.COMPARISION, Routes.compsRoutes);
+
+app.use(BASE_PATHS.USER, Routes.userRoutes);
+app.use(BASE_PATHS.TEST, Routes.testRoutes);
+
+
 
 // 404 handler
 app.use((req, res) => {

@@ -1,4 +1,4 @@
 module.exports = {
-    compsRoutes : require("./compsRoutes"),
-    userRoutes : require("./userRoutes")
+    userRoutes : require("./userRoutes"),
+    testRoutes: require("./testRoutes"),
 }

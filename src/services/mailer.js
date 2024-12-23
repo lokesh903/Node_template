@@ -8,7 +8,7 @@ module.exports = {
     sendMail: async (toEmail, mailSubject, templatePath, locale) => {
 
         try {
-            locale = { ...locale, companyEmail: "abhi78394@gmail.com" };
+            locale = { ...locale, companyEmail: process.env.COMPANY_EMAIL };
 
             if (process.env.SEND_EMAIL === "true") {
                 const configOption = {
@@ -28,7 +28,7 @@ module.exports = {
 
                 const template = await ejs.renderFile(templatePath, locale)
 
-
+      
                 // Send mail with defined transport object
                 const info = await transporter.sendMail({
                     from: process.env.COMPANY_EMAIL,

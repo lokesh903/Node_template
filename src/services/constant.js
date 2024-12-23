@@ -5,7 +5,17 @@ module.exports = {
     AppName: 'Home Service',
 
     BASE_PATHS: {
-        COMPARISION: '/api/comparisions',
+        USER: '/call-training-backend-api/user',
+        TEST: '/call-training-backend-api/test'
+    },
+    OTP_TYPE: {
+        MOBILE: 1,
+        EMAIL: 2,
+    },
+    APP_NAME: 'Reintel Call Training App',
+    EMAIL_TEMPLATES: {
+        FORGOT_PASSWORD: "forgotPassword",
+        VERIFY_EMAIL: "verifyEmail",
     },
 
     URI_PREFIX : {
@@ -24,9 +34,9 @@ module.exports = {
     },
 
     // Mail Subjects (PascalCase for proper nouns)
-    MAIL_SUBJECTS: {
-        FORGET_PASSWORD: 'Forget Password!',
-        ACCOUNT_VERIFICATION: 'Account Verification!',
+    EMAIL_SUBJECTS: {
+        FORGOT_PASSWORD: 'Forget Password!',
+        ACCOUNT_VERIFICATION: 'Email Verification!',
     },
 
     CONVERSATION_STATUS: {
@@ -38,8 +48,20 @@ module.exports = {
 
     //  Email Templates (lowercase for consistency)
     EMAIL_TEMPLATE_PATH: {
-      FORGET_PASSWORD: path.join(path.resolve(__dirname, '..') + '/views/emails/forgot-password/html.ejs' ),
+      FORGOT_PASSWORD: path.join(path.resolve(__dirname, '..') + '/views/emails/forgot-password/html.ejs' ),
       ACCOUNT_VERIFICATION: path.join(path.resolve(__dirname, '..') + '/views/emails/user-verification/html.ejs' ),
+      SEND_OTP: path.join(path.resolve(__dirname, '..') + '/views/emails/send-otp/html.ejs' ),
+    },
+
+    OTP_MOTO :{
+        FORGOT_PASSWORD: "forgot-password",
+        VERIFY_EMAIL: "verify-email",
+    },
+
+    EMAIL_SUBJECTS: {
+        FORGOT_PASSWORD: "Forgot Password",
+        ACCOUNT_VERIFICATION: "Account Verification",
+        SEND_OTP: "Send OTP",
     },
 
     LEAD: {
@@ -50,10 +72,22 @@ module.exports = {
     USER: {
         EXIST:  "User already exists",
         FAILED: "User not saved, please try after some time",
-        SAVED:  "User registered successfully !"
+        SAVED:  "User registered successfully !",
+        NOT_FOUND: "User not found",
+        INVALID_PASSWORD: "Invalid Password",
+        LOGIN_SUCCESS: "Logged in successfully",
+        OTP_SENT: "OTP sent successfully",
+        TOKEN_EXPIRE: "7d",
+        REFRESH_EXPIRE: "7d",
     },
 
     SUCCESS_MESSAGES: {
-        CONTACT_SAVED: "New contact saved !"
+        CONTACT_SAVED: "New contact saved !",
+        TEST_CALLED: "Server is running",
     },
+
+    ERROR_MESSAGES : {
+        INTERNAL_SERVER_ERROR : "Some thing went wrong, Please try after some time.",
+        NOT_FOUND: "Not found",
+    }
 }

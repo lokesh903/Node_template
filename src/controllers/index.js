@@ -1,8 +1,9 @@
-const { comparisions } = require("./comparisions.controller");
+const { test } = require("./test.controller");
 const { user } = require("./user.controller");
 
 
+
 module.exports = {
-    comparisions,
-    user
+    user,
+    test
 }

@@ -1,12 +1,11 @@
-// migrations/20231001123045-create-users.js
 'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
       id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
@@ -30,28 +29,20 @@ module.exports = {
         type: Sequelize.ENUM('admin', 'user'),
         defaultValue: 'user',
       },
-      access_token: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       refresh_token: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      subscription_plan: {
-        type: Sequelize.ENUM('free', 'basic', 'pro'),
-        defaultValue: 'free',
-      },
-      api_usage_limit: {
+      mock_call_usage_limit: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
